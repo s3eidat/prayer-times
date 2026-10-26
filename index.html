@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Prayer Times — Accurate Salah Times for Any City | مواقيت الصلاة | S3eidat Tools</title>
+<meta name="description" content="Accurate prayer times (Fajr, Dhuhr, Asr, Maghrib, Isha) for your location or any city, with calculation methods, Hanafi/Shafi Asr, next-prayer countdown, Hijri date and a printable monthly timetable. Arabic and English. Private.">
+<meta property="og:title" content="Prayer Times — مواقيت الصلاة">
+<meta property="og:description" content="Prayer times, next-prayer countdown and a monthly timetable. Runs 100% in your browser.">
+<meta property="og:image" content="screenshot.png">
+<link rel="icon" href="kit/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="app.css">
+<script src="kit/kit.js"></script>
+<script src="lib/adhan.min.js"></script>
+</head>
+<body data-tool="prayer-times">
+<main class="s3-main" id="main">
+  <section class="s3-hero no-print">
+    <div class="row between">
+      <h1 data-t="title">Prayer Times</h1>
+      <div class="seg" id="lang" role="group" aria-label="Language / اللغة">
+        <button aria-pressed="true" data-v="en">English</button>
+        <button aria-pressed="false" data-v="ar">العربية</button>
+      </div>
+    </div>
+    <p data-t="intro">Prayer times for your city or exact location, calculated on your device. Your location never leaves this page.</p>
+  </section>
+
+  <section class="card no-print">
+    <div class="grid-3">
+      <label class="field"><span data-t="city">City</span><select class="select" id="city"></select></label>
+      <label class="field"><span data-t="method">Calculation method</span><select class="select" id="method"></select></label>
+      <div class="field"><span data-t="asr">Asr</span>
+        <div class="seg" id="madhab" role="group" aria-label="Asr">
+          <button aria-pressed="true" data-v="shafi" data-t="shafi">Standard (Shafi'i, Maliki, Hanbali)</button>
+          <button aria-pressed="false" data-v="hanafi" data-t="hanafi">Hanafi</button>
+        </div>
+      </div>
+    </div>
+    <div class="row mt loc-row">
+      <button class="btn" id="geo"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="7"/></svg><span data-t="useLoc">Use my location</span></button>
+      <label class="field small"><span data-t="lat">Latitude</span><input class="input" id="lat" type="number" step="0.0001" min="-90" max="90" inputmode="decimal"></label>
+      <label class="field small"><span data-t="lon">Longitude</span><input class="input" id="lon" type="number" step="0.0001" min="-180" max="180" inputmode="decimal"></label>
+      <label class="field grow"><span data-t="tz">Time zone</span><select class="select" id="tz"></select></label>
+    </div>
+  </section>
+
+  <section class="card mt today-card">
+    <div class="row between">
+      <div>
+        <h2 class="place" id="place"></h2>
+        <div class="muted" id="dates"></div>
+      </div>
+      <div class="row no-print">
+        <button class="btn small icon" id="prev" aria-label="Previous day">‹</button>
+        <button class="btn small" id="today" data-t="today">Today</button>
+        <button class="btn small icon" id="next" aria-label="Next day">›</button>
+      </div>
+    </div>
+    <div class="next" id="nextBox">
+      <span class="faint" data-t="nextPrayer">Next prayer</span>
+      <b id="nextName">—</b>
+      <span class="count mono" id="countdown">--:--:--</span>
+    </div>
+    <div class="times" id="times"></div>
+    <p class="faint" id="methodNote"></p>
+  </section>
+
+  <section class="card mt" id="monthCard">
+    <div class="row between">
+      <h2><span data-t="monthly">Monthly timetable</span> <small id="monthTitle"></small></h2>
+      <div class="row no-print">
+        <label><span class="sr" data-t="month">Month</span><input class="input month" type="month" id="month"></label>
+        <button class="btn small" id="csv"><svg class="i"><use href="#i-download"/></svg>CSV</button>
+        <button class="btn small" id="print" data-t="print">Print</button>
+      </div>
+    </div>
+    <div class="tbl-wrap mt"><table class="tbl month-tbl" id="table"></table></div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
